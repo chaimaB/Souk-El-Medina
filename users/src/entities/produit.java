@@ -15,14 +15,14 @@ import java.sql.Date;
 public class produit {
      private int ref ;
      private String nomP;
-     private double prix;
+     private float prix;
      private String nomV;
      private Date dateAjout;
      
 public produit (int ref , String nomP , double prix , String nomV , Date dateAjout) {
     this.ref=ref ;
     this.nomP=nomP;
-    this.prix=prix;
+    this.prix=(int) prix;
     this.nomV=nomV;
     this.dateAjout=dateAjout; 
 }
@@ -55,7 +55,7 @@ public produit (int ref , String nomP , double prix , String nomV , Date dateAjo
         this.nomP = nomP;
     }
 
-    public void setPrix(double prix) {
+    public void setPrix(float prix) {
         this.prix = prix;
     }
 

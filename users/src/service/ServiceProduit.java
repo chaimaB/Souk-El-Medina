@@ -33,12 +33,12 @@ public class ServiceProduit {
     }
     
      public void AjouterProduit(produit p) throws SQLException{
-        String req="INSERT INTO Produit () VALUES()";
+        String req="INSERT INTO Produit (ref,nomP,prix,nomV,dateAjout) VALUES(?,?,?,?,?)";
         PreparedStatement pre = con.prepareStatement(req);
         pre.setInt(1, 0);
         pre.setInt(2, p.getRef());
         pre.setString(3, p.getNomP());
-        pre.setDouble(4, p.getPrix());
+        pre.setFloat(4, (int) p.getPrix());
         pre.setString(5, p.getNomV());
         pre.setDate(6, p.getDateAjout());
        

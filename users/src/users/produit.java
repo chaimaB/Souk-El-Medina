@@ -18,23 +18,24 @@ public class produit {
     
     
      public static void main(String[] args) throws ParseException  {
-        // TODO code application logic here
-     //User   user = new User(0,"04745", "fares", "mag", "fares@luf", "pwd",new Date(118,00,05), 25252525, "username", "image", "adresse", 1);
-     Scanner sc = new Scanner(System.in);
-     
-     ServiceProduit sp= new ServiceProduit();
-     System.out.println("entre votre nom de produit :");
-String i = sc.nextLine();
- int id =Integer.parseInt(i);
-System.out.println("entrer votre CIN:");
-String cin = sc.nextLine();
-System.out.println("Veuillez saisir votre nom :");
-String nom = sc.nextLine();
-System.out.println("Veuillez saisir votre prenom:");
-String prenom = sc.nextLine();
-System.out.println("Veuillez saisir votre email :");
-String email = sc.nextLine();
-System.out.println("Veuillez saisir votre mot de passe :");
-String pwd= sc.nextLine();
+         Scanner sc = new Scanner (System.in);
+         
+         ServiceProduit sp = new ServiceProduit();
+         System.out.print("entrer le ref de produit :");
+         String i =sc.nextLine();
+         int ref = Integer.parseInt(i);
+         System.out.println("entrer le nom de produit :");
+         String nomP = sc.nextLine();
+         System.out.println("entrer le prix de produit :");
+         String p =sc.nextLine();
+         int prix = Integer.parseInt(p);
+         System.out.print("entrer nom vendeur :");
+         String nomV = sc.nextLine();
+        
+         
+         
+         
+         
     
+    }
 }

@@ -18,7 +18,7 @@ public class DataSource {
     private Connection con;
     public String user="root";
     public String password="";
-    public String url="jdbc:mysql://localhost:3306/db";
+    public String url="jdbc:mysql://localhost:3306/waw";
     
     private DataSource(){
         try {
