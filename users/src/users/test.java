@@ -7,11 +7,8 @@
 package users;
 import entities.produit;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import service.ServiceProduit;
 
 /**

@@ -56,14 +56,15 @@ public class ServiceProduit {
             PreparedStatement pre=con.prepareStatement(req);
             pre.setInt(1, ref);
            
-        pre.setString(2, p.getNomP());
-        pre.setFloat(3, (int) p.getPrix());
-        pre.setString(4, p.getNomV());
-        pre.setDate(5, p.getDateAjout());
+            pre.setString(2, p.getNomP());
+            pre.setFloat(3, (int) p.getPrix());
+            pre.setString(4, p.getNomV());
+            pre.setDate(5, p.getDateAjout());
             pre.executeUpdate();
             System.out.println(pre.execute());
             System.out.println("Modification avec succès");
-        } catch (SQLException ex) {
+        }   
+            catch (SQLException ex) {
             Logger.getLogger(ServiceProduit.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
@@ -76,8 +77,9 @@ public class ServiceProduit {
             ste1.setInt(1, ref);
             ste1.executeUpdate();
             System.out.println(ste1.execute());
-         System.out.println("suppression avec succès");
-        } catch (SQLException ex) {
+            System.out.println("suppression avec succès");
+        }   
+            catch (SQLException ex) {
             Logger.getLogger(ServiceProduit.class.getName()).log(Level.SEVERE, null, ex);
         }
            
