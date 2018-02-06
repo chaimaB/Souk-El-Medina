@@ -29,7 +29,7 @@ public class ServiceUser {
     public void AjouterUser(User u) throws SQLException{
         String req="INSERT INTO user (id,cin,nom,prenon,email,pwd,dateN,numTel,userName,image,adress,role) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pre = con.prepareStatement(req);
-       pre.setInt(1, 0);
+        pre.setInt(1, 0);
         pre.setString(2, u.getCin());
         pre.setString(3, u.getNom());
         pre.setString(4, u.getPrenom());
