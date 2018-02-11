@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 07 Février 2018 à 01:31
+-- Généré le :  Dim 11 Février 2018 à 21:33
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -84,6 +84,17 @@ CREATE TABLE `event` (
   `owner` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `event`
+--
+
+INSERT INTO `event` (`id_event`, `nom`, `date`, `description`, `image`, `lieu`, `prix`, `owner`) VALUES
+(1, 'a', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1),
+(2, 'aaaa', '2018-01-04', 'aaaaa', 'image', 'lieu', 'prix', 1),
+(5, 'a', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1),
+(10, 'a', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1),
+(11, 'chaima', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -156,6 +167,13 @@ CREATE TABLE `reclamation` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `reclamation`
+--
+
+INSERT INTO `reclamation` (`id`, `reclameur`, `reclamee`, `nbrreclam`, `date`) VALUES
+(1, 'reclameur', 'reclamee', 2, '2018-03-07');
+
 -- --------------------------------------------------------
 
 --
@@ -208,7 +226,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `cin`, `nom`, `prenom`, `email`, `pwd`, `dateN`, `numTel`, `userName`, `image`, `adress`, `role`) VALUES
 (8, 12345678, 'aaa', 'ff', 'ffff', 'fv', '2018-01-05', 2, 'vv', 'vvv', 'vv', 2),
-(9, 12345678, 'aaa', 'ff', 'ffff', 'fv', '2018-01-05', 2, 'vv', 'vvv', 'vv', 2);
+(9, 12345678, 'aaa', 'ff', 'ffff', 'fv', '2018-01-05', 2, 'vv', 'vvv', 'vv', 2),
+(10, 4745, 'fares', 'mag', 'fares@luf', 'pwd', '2019-01-05', 25252525, 'username', 'image', 'adresse', 1),
+(11, 4745, 'fares', 'mag', 'fares@luf', 'pwd', '2019-01-05', 25252525, 'username', 'image', 'adresse', 1),
+(12, 4745, 'fares', 'mag', 'fares@luf', 'pwd', '2019-01-05', 25252525, 'username', 'image', 'adresse', 1);
 
 --
 -- Index pour les tables exportées
@@ -305,7 +326,7 @@ ALTER TABLE `categorie`
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `id_commande` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_commande` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `commentaire`
 --
@@ -320,7 +341,7 @@ ALTER TABLE `dispo`
 -- AUTO_INCREMENT pour la table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `local`
 --
@@ -330,7 +351,7 @@ ALTER TABLE `local`
 -- AUTO_INCREMENT pour la table `locaux_event`
 --
 ALTER TABLE `locaux_event`
-  MODIFY `id_Local_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_Local_event` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `sous_categorie`
 --
@@ -340,7 +361,7 @@ ALTER TABLE `sous_categorie`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Contraintes pour les tables exportées
 --
