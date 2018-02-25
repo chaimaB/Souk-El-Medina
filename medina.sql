@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 11 Février 2018 à 21:33
+-- Généré le :  Dim 25 Février 2018 à 22:03
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -78,7 +78,7 @@ CREATE TABLE `event` (
   `nom` varchar(50) NOT NULL,
   `date` date NOT NULL,
   `description` varchar(100) NOT NULL,
-  `image` varchar(50) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `lieu` varchar(50) NOT NULL,
   `prix` varchar(10) NOT NULL,
   `owner` int(11) NOT NULL
@@ -89,11 +89,12 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`id_event`, `nom`, `date`, `description`, `image`, `lieu`, `prix`, `owner`) VALUES
-(1, 'a', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1),
-(2, 'aaaa', '2018-01-04', 'aaaaa', 'image', 'lieu', 'prix', 1),
-(5, 'a', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1),
-(10, 'a', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1),
-(11, 'chaima', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1);
+(34, 'narimenN', '2018-02-14', 'blabla', 'sticker5.jpg', 'dar', '1dt', 0),
+(35, 'medina', '2018-03-05', 'hhhhh', 'foire-salon-artisanat-milan-tunisie.jpg', 'medina', '12dt', 17),
+(36, 'medina1', '2018-03-05', 'hhhhhhhhhh', '1.PNG', 'medina2', '12dt', 18),
+(37, 'medina3', '2018-03-05', 'hhhhhhhhhh', '7620040c5ef46295f990d5706e99b364--vintage-backgrounds-background-designs.jpg', 'medina3', '12dt', 20),
+(38, 'event', '2018-03-09', 'evenement', 'sticker2.jpg', 'dar', '15dt', 17),
+(39, 'eve', '2018-02-02', 'gfe', '11118382_826768697358144_8922210270999519973_n.jpg', 'eee', '12', 8);
 
 -- --------------------------------------------------------
 
@@ -149,9 +150,23 @@ CREATE TABLE `produit` (
   `ref` int(11) NOT NULL,
   `nomP` varchar(10) NOT NULL,
   `prix` float NOT NULL,
-  `nomV` varchar(20) NOT NULL,
-  `dateAjout` date NOT NULL
+  `img` varchar(255) DEFAULT NULL,
+  `quantit` int(11) NOT NULL DEFAULT '1',
+  `descrip` varchar(255) NOT NULL,
+  `nomV` varchar(20) DEFAULT NULL,
+  `dateAjout` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `produit`
+--
+
+INSERT INTO `produit` (`ref`, `nomP`, `prix`, `img`, `quantit`, `descrip`, `nomV`, `dateAjout`) VALUES
+(1, 'azerty', 14, NULL, 7, 'azertyui', NULL, NULL),
+(2, 'testtest', 12, NULL, 11, 'dfghbnjk', NULL, '1970-01-01'),
+(3, 'aaaaaa', 1, NULL, 7, 'dcfvghbj', NULL, '1970-01-01'),
+(4, 'aaaaaa', 1, NULL, 7, 'dcfvghbj', NULL, '1970-01-01'),
+(5, 'loool', 15, NULL, 11, 'here w we', NULL, '1970-01-01');
 
 -- --------------------------------------------------------
 
@@ -207,7 +222,7 @@ CREATE TABLE `sous_categorie` (
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `cin` int(8) NOT NULL,
+  `cin` varchar(8) NOT NULL,
   `nom` varchar(10) NOT NULL,
   `prenom` varchar(20) NOT NULL,
   `email` varchar(20) NOT NULL,
@@ -225,11 +240,16 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `cin`, `nom`, `prenom`, `email`, `pwd`, `dateN`, `numTel`, `userName`, `image`, `adress`, `role`) VALUES
-(8, 12345678, 'aaa', 'ff', 'ffff', 'fv', '2018-01-05', 2, 'vv', 'vvv', 'vv', 2),
-(9, 12345678, 'aaa', 'ff', 'ffff', 'fv', '2018-01-05', 2, 'vv', 'vvv', 'vv', 2),
-(10, 4745, 'fares', 'mag', 'fares@luf', 'pwd', '2019-01-05', 25252525, 'username', 'image', 'adresse', 1),
-(11, 4745, 'fares', 'mag', 'fares@luf', 'pwd', '2019-01-05', 25252525, 'username', 'image', 'adresse', 1),
-(12, 4745, 'fares', 'mag', 'fares@luf', 'pwd', '2019-01-05', 25252525, 'username', 'image', 'adresse', 1);
+(8, '12345678', 'aaa', 'ff', 'ffff', 'fv', '2018-01-05', 2, 'vv', 'vvv', 'vv', 2),
+(9, '12345678', 'aaa', 'ff', 'ffff', 'fv', '2018-01-05', 2, 'vv', 'vvv', 'vv', 2),
+(10, '4745', 'fares', 'mag', 'fares@luf', 'pwd', '2019-01-05', 25252525, 'username', 'image', 'adresse', 1),
+(11, '4745', 'fares', 'mag', 'fares@luf', 'pwd', '2019-01-05', 25252525, 'username', 'image', 'adresse', 1),
+(12, '4745', 'fares', 'mag', 'fares@luf', 'pwd', '2019-01-05', 25252525, 'username', 'image', 'adresse', 1),
+(13, '12345678', 'test', 'test', 'test', 'test', '1970-01-01', 12345678, 'test', 'test', 'test', 1),
+(14, '12345678', 'tyuhij', 'ftgh', 'ftgyhjk', 'dfghj', '2018-02-08', 4563, 'dfgh', 'sdfghjk', 'dfghj', 2),
+(15, '1', 'test2', 'test2', 'test2', 'test2', '2018-02-27', 1, 'test2', 'test2', 'test2', 1),
+(16, '1536486', 'test4', 'test4', 'test4', 'test4', '2018-02-06', 123465, 'test4', 'test4', 'test4', 1),
+(17, '1', 'aaaaaa', 'aaa', 'aaa', 'aa', '2018-02-07', 1, 'aaa', 'aaa', 'aaaa', 1);
 
 --
 -- Index pour les tables exportées
@@ -341,7 +361,7 @@ ALTER TABLE `dispo`
 -- AUTO_INCREMENT pour la table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT pour la table `local`
 --
@@ -353,6 +373,11 @@ ALTER TABLE `local`
 ALTER TABLE `locaux_event`
   MODIFY `id_Local_event` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `produit`
+--
+ALTER TABLE `produit`
+  MODIFY `ref` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT pour la table `sous_categorie`
 --
 ALTER TABLE `sous_categorie`
@@ -361,7 +386,7 @@ ALTER TABLE `sous_categorie`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- Contraintes pour les tables exportées
 --
