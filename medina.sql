@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 25 Février 2018 à 22:03
+-- Généré le :  Mar 27 Février 2018 à 16:12
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -43,6 +43,14 @@ CREATE TABLE `commande` (
   `prix` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `commande`
+--
+
+INSERT INTO `commande` (`id_commande`, `datec`, `prix`) VALUES
+(1, '2018-03-14', 0),
+(2, '2018-03-14', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -51,9 +59,20 @@ CREATE TABLE `commande` (
 
 CREATE TABLE `commentaire` (
   `id` int(11) NOT NULL,
-  `contenu` varchar(50) NOT NULL,
-  `date` date NOT NULL
+  `contenu` varchar(20) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_user` int(11) NOT NULL,
+  `id_event` int(11) NOT NULL,
+  `owner` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `commentaire`
+--
+
+INSERT INTO `commentaire` (`id`, `contenu`, `date`, `id_user`, `id_event`, `owner`) VALUES
+(10, 'aaaa', '2018-02-27 10:51:36', 17, 45, 'aaa'),
+(11, 'test', '2018-02-27 10:54:12', 17, 45, 'aaa');
 
 -- --------------------------------------------------------
 
@@ -89,12 +108,7 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`id_event`, `nom`, `date`, `description`, `image`, `lieu`, `prix`, `owner`) VALUES
-(34, 'narimenN', '2018-02-14', 'blabla', 'sticker5.jpg', 'dar', '1dt', 0),
-(35, 'medina', '2018-03-05', 'hhhhh', 'foire-salon-artisanat-milan-tunisie.jpg', 'medina', '12dt', 17),
-(36, 'medina1', '2018-03-05', 'hhhhhhhhhh', '1.PNG', 'medina2', '12dt', 18),
-(37, 'medina3', '2018-03-05', 'hhhhhhhhhh', '7620040c5ef46295f990d5706e99b364--vintage-backgrounds-background-designs.jpg', 'medina3', '12dt', 20),
-(38, 'event', '2018-03-09', 'evenement', 'sticker2.jpg', 'dar', '15dt', 17),
-(39, 'eve', '2018-02-02', 'gfe', '11118382_826768697358144_8922210270999519973_n.jpg', 'eee', '12', 8);
+(45, 'che guivara', '2018-03-10', 'che', 'Che-Guevara.jpg', 'cuba', '165478', 17);
 
 -- --------------------------------------------------------
 
@@ -143,6 +157,30 @@ CREATE TABLE `locaux_event` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `participation`
+--
+
+CREATE TABLE `participation` (
+  `id_participation` int(11) NOT NULL,
+  `idEvent` int(11) NOT NULL,
+  `idParticipant` int(11) NOT NULL,
+  `participant` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `participation`
+--
+
+INSERT INTO `participation` (`id_participation`, `idEvent`, `idParticipant`, `participant`) VALUES
+(9, 45, 17, 'aaa'),
+(10, 45, 17, 'aaa'),
+(11, 45, 8, 'vv'),
+(12, 45, 8, 'vv'),
+(13, 45, 17, 'aaa');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `produit`
 --
 
@@ -150,23 +188,19 @@ CREATE TABLE `produit` (
   `ref` int(11) NOT NULL,
   `nomP` varchar(10) NOT NULL,
   `prix` float NOT NULL,
-  `img` varchar(255) DEFAULT NULL,
+  `img` varchar(255) NOT NULL,
   `quantit` int(11) NOT NULL DEFAULT '1',
   `descrip` varchar(255) NOT NULL,
-  `nomV` varchar(20) DEFAULT NULL,
-  `dateAjout` date DEFAULT NULL
+  `nomV` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `produit`
 --
 
-INSERT INTO `produit` (`ref`, `nomP`, `prix`, `img`, `quantit`, `descrip`, `nomV`, `dateAjout`) VALUES
-(1, 'azerty', 14, NULL, 7, 'azertyui', NULL, NULL),
-(2, 'testtest', 12, NULL, 11, 'dfghbnjk', NULL, '1970-01-01'),
-(3, 'aaaaaa', 1, NULL, 7, 'dcfvghbj', NULL, '1970-01-01'),
-(4, 'aaaaaa', 1, NULL, 7, 'dcfvghbj', NULL, '1970-01-01'),
-(5, 'loool', 15, NULL, 11, 'here w we', NULL, '1970-01-01');
+INSERT INTO `produit` (`ref`, `nomP`, `prix`, `img`, `quantit`, `descrip`, `nomV`) VALUES
+(7, 'poiu', 410, 'file:///C://wamp64//www//Images//sticker,375x360.png', 17, 'azerty', 'vv'),
+(8, 'chahcia', 5, 'file:///C://wamp64//www//Images//sticker9.jpg', 7, 'équipement artisanale', 'aaa');
 
 -- --------------------------------------------------------
 
@@ -176,18 +210,21 @@ INSERT INTO `produit` (`ref`, `nomP`, `prix`, `img`, `quantit`, `descrip`, `nomV
 
 CREATE TABLE `reclamation` (
   `id` int(11) NOT NULL,
-  `reclameur` varchar(20) NOT NULL,
-  `reclamee` varchar(20) NOT NULL,
-  `nbrreclam` int(11) NOT NULL,
-  `date` date NOT NULL
+  `reclameur` int(20) DEFAULT NULL,
+  `reclamee` varchar(20) DEFAULT NULL,
+  `contenu` varchar(255) NOT NULL,
+  `date` date DEFAULT NULL,
+  `userName` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `reclamation`
 --
 
-INSERT INTO `reclamation` (`id`, `reclameur`, `reclamee`, `nbrreclam`, `date`) VALUES
-(1, 'reclameur', 'reclamee', 2, '2018-03-07');
+INSERT INTO `reclamation` (`id`, `reclameur`, `reclamee`, `contenu`, `date`, `userName`) VALUES
+(72, NULL, NULL, 'hhhhhhhhhhhhhh', NULL, ''),
+(76, NULL, NULL, 'vvvvvvvvvv', NULL, ''),
+(77, NULL, NULL, 'ghbjnm', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -251,6 +288,30 @@ INSERT INTO `user` (`id`, `cin`, `nom`, `prenom`, `email`, `pwd`, `dateN`, `numT
 (16, '1536486', 'test4', 'test4', 'test4', 'test4', '2018-02-06', 123465, 'test4', 'test4', 'test4', 1),
 (17, '1', 'aaaaaa', 'aaa', 'aaa', 'aa', '2018-02-07', 1, 'aaa', 'aaa', 'aaaa', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user2`
+--
+
+CREATE TABLE `user2` (
+  `id` int(11) NOT NULL,
+  `userName` varchar(20) NOT NULL,
+  `email` varchar(20) NOT NULL,
+  `pwd` varchar(20) NOT NULL,
+  `numTel` int(8) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `adress` varchar(30) NOT NULL,
+  `role` int(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `user2`
+--
+
+INSERT INTO `user2` (`id`, `userName`, `email`, `pwd`, `numTel`, `image`, `adress`, `role`) VALUES
+(1, 'chamchoum', 'chaima@uji', 'aaaaaaa', 12345678, '1366x768-Wallpaper-High-Resolution.jpg', 'aaaaaaaaa', 1);
+
 --
 -- Index pour les tables exportées
 --
@@ -271,7 +332,10 @@ ALTER TABLE `commande`
 -- Index pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`) USING BTREE,
+  ADD KEY `id_user_2` (`id_user`),
+  ADD KEY `id_user_3` (`id_user`);
 
 --
 -- Index pour la table `dispo`
@@ -304,16 +368,25 @@ ALTER TABLE `locaux_event`
   ADD PRIMARY KEY (`id_Local_event`);
 
 --
+-- Index pour la table `participation`
+--
+ALTER TABLE `participation`
+  ADD PRIMARY KEY (`id_participation`),
+  ADD KEY `idParticipant` (`idParticipant`);
+
+--
 -- Index pour la table `produit`
 --
 ALTER TABLE `produit`
-  ADD PRIMARY KEY (`ref`);
+  ADD PRIMARY KEY (`ref`),
+  ADD KEY `nomV` (`nomV`);
 
 --
 -- Index pour la table `reclamation`
 --
 ALTER TABLE `reclamation`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userName` (`userName`);
 
 --
 -- Index pour la table `reservation`
@@ -331,6 +404,13 @@ ALTER TABLE `sous_categorie`
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userName` (`userName`);
+
+--
+-- Index pour la table `user2`
+--
+ALTER TABLE `user2`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -346,12 +426,12 @@ ALTER TABLE `categorie`
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `id_commande` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_commande` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `dispo`
 --
@@ -361,7 +441,7 @@ ALTER TABLE `dispo`
 -- AUTO_INCREMENT pour la table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT pour la table `local`
 --
@@ -373,10 +453,20 @@ ALTER TABLE `local`
 ALTER TABLE `locaux_event`
   MODIFY `id_Local_event` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `participation`
+--
+ALTER TABLE `participation`
+  MODIFY `id_participation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `ref` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ref` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT pour la table `reclamation`
+--
+ALTER TABLE `reclamation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT pour la table `sous_categorie`
 --
@@ -388,14 +478,31 @@ ALTER TABLE `sous_categorie`
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
+-- AUTO_INCREMENT pour la table `user2`
+--
+ALTER TABLE `user2`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- Contraintes pour les tables exportées
 --
+
+--
+-- Contraintes pour la table `commentaire`
+--
+ALTER TABLE `commentaire`
+  ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `dispo`
 --
 ALTER TABLE `dispo`
   ADD CONSTRAINT `dispo_ibfk_1` FOREIGN KEY (`id_dispo`) REFERENCES `local` (`id_local`);
+
+--
+-- Contraintes pour la table `produit`
+--
+ALTER TABLE `produit`
+  ADD CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`nomV`) REFERENCES `user` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
