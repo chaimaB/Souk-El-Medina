@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 07 Février 2018 à 00:00
+-- Généré le :  Mar 27 Février 2018 à 20:06
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -19,6 +19,34 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `medina`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `annonce`
+--
+
+CREATE TABLE `annonce` (
+  `id` int(11) NOT NULL,
+  `startdate` date DEFAULT NULL,
+  `enddate` date DEFAULT NULL,
+  `id_local` int(11) NOT NULL,
+  `id_prop` int(11) NOT NULL,
+  `prix` float NOT NULL,
+  `owner` varchar(50) NOT NULL,
+  `image` varchar(100) DEFAULT NULL,
+  `type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `annonce`
+--
+
+INSERT INTO `annonce` (`id`, `startdate`, `enddate`, `id_local`, `id_prop`, `prix`, `owner`, `image`, `type`) VALUES
+(22, NULL, NULL, 22, 8, 22, 'vv', NULL, 1),
+(23, '2018-02-22', '2018-03-01', 13, 8, 88, 'vv', NULL, 2),
+(24, '2018-02-22', '2018-03-01', 13, 8, 88, 'vv', NULL, 2),
+(25, NULL, NULL, 9, 8, 22, 'vv', '26734103_1205200402916243_8851949491831023772_n.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -63,8 +91,9 @@ CREATE TABLE `commentaire` (
 
 CREATE TABLE `dispo` (
   `id_dispo` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `local` int(11) NOT NULL
+  `local` int(11) NOT NULL,
+  `stardate` date NOT NULL,
+  `enddate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -84,6 +113,17 @@ CREATE TABLE `event` (
   `owner` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `event`
+--
+
+INSERT INTO `event` (`id_event`, `nom`, `date`, `description`, `image`, `lieu`, `prix`, `owner`) VALUES
+(1, 'a', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1),
+(2, 'aaaa', '2018-01-04', 'aaaaa', 'image', 'lieu', 'prix', 1),
+(5, 'a', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1),
+(10, 'a', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1),
+(11, 'chaima', '2018-01-04', 'des', 'image', 'lieu', 'prix', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -94,21 +134,24 @@ CREATE TABLE `local` (
   `id_local` int(11) NOT NULL,
   `description` varchar(50) NOT NULL,
   `nom_local` varchar(10) NOT NULL,
-  `prix` float NOT NULL,
   `superficie` float NOT NULL,
   `localisation` varchar(20) NOT NULL,
-  `imgl1` varchar(10) NOT NULL,
-  `type` tinyint(4) NOT NULL,
-  `prop` int(11) NOT NULL
+  `imgl1` varchar(10) DEFAULT NULL,
+  `prop` int(11) DEFAULT NULL,
+  `lat` double NOT NULL,
+  `lang` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `local`
 --
 
-INSERT INTO `local` (`id_local`, `description`, `nom_local`, `prix`, `superficie`, `localisation`, `imgl1`, `type`, `prop`) VALUES
-(5, '04745', 'fares', 12, 12, 'pwd', 'fe', 1, 0),
-(6, '04745', 'fares', 12, 12, 'pwd', 'fe', 1, 0);
+INSERT INTO `local` (`id_local`, `description`, `nom_local`, `superficie`, `localisation`, `imgl1`, `prop`, `lat`, `lang`) VALUES
+(9, 'zefer', 'erf', 12, 'erfre', NULL, 8, 0, 0),
+(13, 'zefer', 'xxxxx', 12, 'zefez', NULL, 8, 0, 0),
+(22, 'jjjj', 'kl,k,k,k', 22, 'lk,lk', NULL, 8, 0, 0),
+(23, '', '31', 12, 'kj', NULL, 8, 36.79320276932009, 10.180377960205078),
+(24, 'hn', 'zaed', 22, 'skdfjz', NULL, 8, 36.780004815311294, 10.180377960205078);
 
 -- --------------------------------------------------------
 
@@ -123,9 +166,18 @@ CREATE TABLE `locaux_event` (
   `prix` float NOT NULL,
   `superficie` float NOT NULL,
   `localisation` varchar(50) NOT NULL,
-  `imgl1` varchar(50) NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `imgl1` varchar(50) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `prop` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `locaux_event`
+--
+
+INSERT INTO `locaux_event` (`id_Local_event`, `description`, `nom_local`, `prix`, `superficie`, `localisation`, `imgl1`, `status`, `prop`) VALUES
+(1, 'cxv', 'zfze', 12, 100, 'sdfesd', NULL, NULL, 8),
+(2, 'dfghjk', 'azertfghjk', 451, 545, 'rrdtfyghjk', NULL, NULL, 8);
 
 -- --------------------------------------------------------
 
@@ -158,6 +210,13 @@ CREATE TABLE `reclamation` (
   `nbrreclam` int(11) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `reclamation`
+--
+
+INSERT INTO `reclamation` (`id`, `reclameur`, `reclamee`, `nbrreclam`, `date`) VALUES
+(1, 'reclameur', 'reclamee', 2, '2018-03-07');
 
 -- --------------------------------------------------------
 
@@ -218,6 +277,14 @@ INSERT INTO `user` (`id`, `cin`, `nom`, `prenom`, `email`, `pwd`, `dateN`, `numT
 --
 
 --
+-- Index pour la table `annonce`
+--
+ALTER TABLE `annonce`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_prop` (`id_prop`),
+  ADD KEY `id_local` (`id_local`);
+
+--
 -- Index pour la table `categorie`
 --
 ALTER TABLE `categorie`
@@ -263,7 +330,8 @@ ALTER TABLE `local`
 -- Index pour la table `locaux_event`
 --
 ALTER TABLE `locaux_event`
-  ADD PRIMARY KEY (`id_Local_event`);
+  ADD PRIMARY KEY (`id_Local_event`),
+  ADD KEY `prop` (`prop`);
 
 --
 -- Index pour la table `produit`
@@ -300,6 +368,11 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `annonce`
+--
+ALTER TABLE `annonce`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
@@ -323,17 +396,17 @@ ALTER TABLE `dispo`
 -- AUTO_INCREMENT pour la table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `local`
 --
 ALTER TABLE `local`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `locaux_event`
 --
 ALTER TABLE `locaux_event`
-  MODIFY `id_Local_event` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Local_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `sous_categorie`
 --
@@ -349,10 +422,29 @@ ALTER TABLE `user`
 --
 
 --
+-- Contraintes pour la table `annonce`
+--
+ALTER TABLE `annonce`
+  ADD CONSTRAINT `annonce_ibfk_2` FOREIGN KEY (`id_prop`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `annonce_ibfk_3` FOREIGN KEY (`id_local`) REFERENCES `local` (`id_local`);
+
+--
 -- Contraintes pour la table `dispo`
 --
 ALTER TABLE `dispo`
-  ADD CONSTRAINT `dispo_ibfk_1` FOREIGN KEY (`id_dispo`) REFERENCES `local` (`id_local`);
+  ADD CONSTRAINT `dispo_ibfk_1` FOREIGN KEY (`local`) REFERENCES `locaux_event` (`id_Local_event`);
+
+--
+-- Contraintes pour la table `local`
+--
+ALTER TABLE `local`
+  ADD CONSTRAINT `local_ibfk_1` FOREIGN KEY (`prop`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `locaux_event`
+--
+ALTER TABLE `locaux_event`
+  ADD CONSTRAINT `locaux_event_ibfk_1` FOREIGN KEY (`prop`) REFERENCES `user` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
